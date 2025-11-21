@@ -1,63 +1,64 @@
-Ứng dụng Mô phỏng Blockchain (Blockchain Demo App)
+Blockchain Demo - Hybrid, Validation & Tampering
 
-Dự án này là một ứng dụng web tương tác được xây dựng bằng Python và Streamlit, nhằm minh họa trực quan các khái niệm cốt lõi của Blockchain như: cấu trúc Khối (Block), cơ chế Bằng chứng công việc (Proof-of-Work), tính Bất biến (Immutability) và xác thực chuỗi.
+Ứng dụng mô phỏng Blockchain trực quan, tập trung vào việc minh họa tính bất biến (Immutability) và khả năng tùy biến thuật toán trong công nghệ chuỗi khối hiện đại.
 
-📋 Tính năng chính
+🌟 Tính năng Chính (Key Features)
 
-Mô phỏng Đào Coin (Mining):
+Đa Thuật Toán Băm (Hashing Algorithms):
 
-Tạo giao dịch mới (Người gửi, Người nhận, Số tiền).
+Hỗ trợ SHA-256 (Bitcoin Standard).
 
-Thực hiện Proof-of-Work để tìm nonce hợp lệ.
+Hỗ trợ SHA3-256 (Ethereum Standard).
 
-Thêm khối mới vào chuỗi.
+Hỗ trợ BLAKE2b (Tốc độ cao).
 
-Sổ cái (Ledger Explorer):
+Đặc điểm: Cho phép người dùng chọn thuật toán cho từng Block, minh họa kiến trúc linh hoạt (Hybrid Chain).
 
-Xem chi tiết từng khối trong chuỗi (Hash, Previous Hash, Timestamp, Data).
+Đa Cơ chế Đồng thuận (Consensus Mechanisms):
 
-Giao diện trực quan dạng thẻ.
+Proof-of-Work (PoW): Mô phỏng quá trình "đào" tốn công sức để giải bài toán nonce.
 
-Kiểm tra & Tấn công (Simulation):
+Proof-of-Authority (PoA): Mô phỏng xác thực nhanh chóng dựa trên danh tính (Validator) và không tốn năng lượng.
 
-Công cụ Hacker: Cho phép sửa đổi dữ liệu của một khối đã tồn tại để mô phỏng tấn công.
+Công cụ Kiểm thử Tính toàn vẹn (Validation & Tampering):
 
-Xác thực (Validator): Quét toàn bộ chuỗi để phát hiện sự thay đổi dữ liệu hoặc đứt gãy liên kết.
+Validate (Kiểm tra): Tự động quét toàn bộ chuỗi để xác minh tính toàn vẹn (Hash Integrity & Link Integrity).
 
-🛠️ Yêu cầu hệ thống
+Tamper (Sửa dữ liệu): Cho phép người dùng chọn bất kỳ Block nào trong quá khứ và thay đổi dữ liệu của nó để mô phỏng cuộc tấn công.
 
-Python 3.8 trở lên.
+🚀 Cách chạy ứng dụng
 
-🚀 Cài đặt và Chạy ứng dụng
+Cài đặt thư viện:
 
-Bước 1: Cài đặt thư viện
-
-Mở terminal (hoặc Command Prompt) tại thư mục chứa dự án và chạy lệnh sau để cài đặt các thư viện cần thiết:
+Đảm bảo bạn đã cài đặt các thư viện cần thiết (chỉ cần Streamlit).
+<!-- end list -->
 
 pip install -r requirements.txt
 
 
-Bước 2: Chạy ứng dụng
-
-Sử dụng lệnh streamlit run để khởi chạy ứng dụng:
+Khởi chạy ứng dụng:
 
 streamlit run simple_blockchain.py
 
 
-Sau khi chạy lệnh, trình duyệt web sẽ tự động mở ra tại địa chỉ http://localhost:8501.
+💡 Hướng dẫn Kiểm tra Tính Bất biến (Immutability Test)
 
-📚 Cấu trúc dự án
+Sử dụng Tab "🛠️ Sửa & Kiểm Tra (Tamper & Validate)" để chứng minh nguyên lý bất biến của Blockchain:
 
-simple_blockchain.py: Mã nguồn chính chứa logic Blockchain và giao diện Streamlit.
+Đào Block: Đào khoảng 3-4 Block ở Tab "🔨 Đào Block".
 
-requirements.txt: Danh sách các thư viện Python cần thiết.
+Sửa Block:
 
-README.md: Tài liệu hướng dẫn này.
+Chuyển sang Tab "Sửa & Kiểm Tra".
 
-🧠 Nguyên lý hoạt động (Tóm tắt)
+Ở mục "1. Sửa đổi dữ liệu (Tamper)", chọn Block #1 (hoặc Block bất kỳ).
 
-Block: Mỗi khối chứa một liên kết (previous_hash) đến khối trước đó, tạo thành một chuỗi.
+Nhập dữ liệu giả mạo (ví dụ: "Hacked 1000 BTC").
 
-Proof-of-Work: Để thêm khối, hệ thống phải giải một bài toán tìm mã băm bắt đầu bằng số lượng số 0 nhất định (độ khó).
+Bấm "⚠️ Ghi đè dữ liệu (Hack Block)".
 
-Immutability: Nếu hacker sửa dữ liệu ở Khối A, mã Hash của Khối A thay đổi -> Khối B (trỏ đến A) sẽ bị sai liên kết -> Chuỗi bị vô hiệu hóa.
+Kiểm tra:
+
+Hệ thống Realtime sẽ ngay lập tức báo lỗi (🔴).
+
+Bấm "🔍 Quét toàn bộ chuỗi" để nhận thông báo chi tiết: lỗi xảy ra tại Block đã sửa (Hash Integrity fail) và Block liền kề (Link Integrity fail) do Hash của Block trước đã thay đổi.
